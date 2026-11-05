@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add go2rtc Media Player",
+        "description": "Create a media_player that can play audio on any camera stream that supports two-way audio in go2rtc.",
+        "data": {
+          "name": "Name",
+          "stream": "go2rtc stream name",
+          "audio": "Audio codec",
+          "url": "go2rtc base URL"
+        },
+        "data_description": {
+          "name": "Friendly name shown in Home Assistant",
+          "stream": "Must match the stream name defined in go2rtc",
+          "audio": "Codec expected by the camera backchannel (pcma for most Tapo / Reolink)",
+          "url": "Leave as default if go2rtc runs on the same host"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to go2rtc. Check the URL and that go2rtc is running."
+    },
+    "abort": {
+      "already_configured": "This stream is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit go2rtc Media Player",
+        "data": {
+          "name": "Name",
+          "stream": "go2rtc stream name",
+          "audio": "Audio codec",
+          "url": "go2rtc base URL"
+        }
+      }
+    }
+  }
+}
