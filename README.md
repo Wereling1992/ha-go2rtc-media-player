@@ -106,21 +106,21 @@ data:
    audio, sendonly, PCMA/8000
    ```
 3. Test **Play Audio** directly from the go2rtc Web UI first
-4. If the Web UI works but the media_player does not, check the Home Assistant log for `ha-go2rtc-media-player`
+4. If the Web UI works but the media_player does not, check the Home Assistant log for `go2rtc_media_player`
 
 ## FAQ / Q&A
 
 ### Why is there no volume control in Home Assistant?
 
 go2rtc's stream-to-camera API has **no volume parameter**.  
-Any attempt to inject a software volume filter via ffmpeg tends to break audio on many cameras (especially Tapo).
+Software volume filters via ffmpeg often break audio on cameras (especially Tapo).
 
 **Adjust the speaker volume in the camera's own app** instead:
 
-- **Tapo**: open the Tapo app → camera settings → sound / speaker volume
-- Other brands: use the manufacturer app or the camera's web UI
+- **Tapo**: Tapo app → camera settings → sound / speaker volume
+- Other brands: manufacturer app or camera web UI
 
-Chime TTS also has its own `volume_level` / gain options if you need louder or quieter announcements at generation time.
+Chime TTS also has its own volume / gain options if you need louder or quieter announcements at generation time.
 
 ### Why does the player stay on "Playing"?
 
@@ -131,7 +131,7 @@ This integration therefore:
 - Automatically returns to **Idle** after about 60 seconds
 - Returns to **Idle** immediately if you call `media_player.media_stop`
 
-Short TTS clips will often finish well before the 60-second timeout; the state is only a rough indicator.
+Short TTS clips often finish well before the 60-second timeout; the state is only a rough indicator.
 
 ### Tapo camera has no sound
 

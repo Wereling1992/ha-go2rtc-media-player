@@ -1,13 +1,11 @@
 {
   "domain": "go2rtc_media_player",
   "name": "go2rtc Media Player",
-  "codeowners": [
-    "@Wereling1992"
-  ],
+  "codeowners": ["@Wereling1992"],
   "config_flow": true,
   "documentation": "https://github.com/Wereling1992/ha-go2rtc-media-player",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/Wereling1992/ha-go2rtc-media-player/issues",
+  "issue_tracker": "https://github.com/Werelin1992/ha-go2rtc-media-player/issues",
   "requirements": [],
   "version": "1.0.0"
 }
