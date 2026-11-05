@@ -2,16 +2,27 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
 
-Turn any go2rtc camera stream that supports **two-way audio** into a real Home Assistant `media_player`.
+**Turn any IP camera with two-way audio into a Home Assistant `media_player` — no `configuration.yaml` editing required.**
 
-Play TTS, Chime TTS, music files, radio streams, etc. directly through the camera speaker — no YAML required after installation.
+Play TTS, Chime TTS, music, or any audio file through the camera speaker. Configure everything from **Settings → Devices & Services**, just like a normal integration.
+
+Unlike the YAML-only `media_player` platform in [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC), this integration uses a full config flow so you never need to restart Home Assistant just to add or edit a camera speaker.
+
+## Why this integration?
+
+| | WebRTC YAML media_player | **go2rtc Media Player** |
+|--|--------------------------|-------------------------|
+| Setup | Edit `configuration.yaml` | UI only |
+| Add / change camera | Restart Home Assistant | Options flow (gear icon) |
+| TTS / Chime TTS | Yes | Yes |
+| HACS install | — | Yes |
 
 ## Features
 
-- UI configuration (Settings → Devices & Services)
+- **No YAML** — add and edit players from the UI
 - Works with `media_player.play_media`, TTS, Chime TTS, Music Assistant, etc.
 - Uses the official go2rtc [Stream to camera](https://go2rtc.org/internal/streams/#stream-to-camera) API
-- Options flow to change name / stream / codec later
+- Options flow to change name / stream / codec later without restarting
 - Compatible with the same backchannel mechanism used by [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC)
 
 ## Requirements
@@ -49,6 +60,8 @@ Play TTS, Chime TTS, music files, radio streams, etc. directly through the camer
 
 ## Configuration
 
+**No `configuration.yaml` needed.**
+
 1. Go to **Settings → Devices & Services**
 2. Click **+ Add Integration**
 3. Search for **go2rtc Media Player**
@@ -62,6 +75,8 @@ Play TTS, Chime TTS, music files, radio streams, etc. directly through the camer
 | go2rtc base URL | http://127.0.0.1:1984 | Change only if go2rtc is remote |
 
 You will get a new entity, e.g. `media_player.front_door_speaker`.
+
+To edit later, open the integration and use the **gear (options)** icon — no restart required for name / stream / codec changes.
 
 ## Usage
 
@@ -110,6 +125,10 @@ data:
 
 ## FAQ / Q&A
 
+### Do I need to edit configuration.yaml?
+
+No. Everything is done in the UI (Settings → Devices & Services). That is the main point of this integration.
+
 ### Why is there no volume control in Home Assistant?
 
 go2rtc's stream-to-camera API has **no volume parameter**.  
@@ -139,6 +158,11 @@ Short TTS clips often finish well before the 60-second timeout; the state is onl
 2. Confirm probe shows `audio, sendonly, PCMA/8000`
 3. Use audio codec `pcma`
 4. Enable **Third-Party Compatibility** in the Tapo app (Lab section) if needed
+
+### HACS shows "icon not available"
+
+Expected for many custom integrations after Home Assistant 2026.3.  
+The icon still appears under **Settings → Devices & Services** after install. HACS list icons for new custom integrations are a known HACS limitation.
 
 ## Credits
 
