@@ -14,8 +14,6 @@ Unlike the YAML-only `media_player` platform in [AlexxIT/WebRTC](https://github.
 |--|--------------------------|-------------------------|
 | Setup | Edit `configuration.yaml` | UI only |
 | Add / change camera | Restart Home Assistant | Options flow (gear icon) |
-| TTS / Chime TTS | Yes | Yes |
-| HACS install | — | Yes |
 
 ## Features
 
@@ -49,7 +47,7 @@ Unlike the YAML-only `media_player` platform in [AlexxIT/WebRTC](https://github.
 ### HACS (recommended)
 
 1. HACS → Integrations → ⋮ → Custom repositories
-2. Add this repository URL, category **Integration**
+2. Add `https://github.com/Wereling1992/ha-go2rtc-media-player` as a repository, category **Integration**
 3. Install **go2rtc Media Player**
 4. Restart Home Assistant
 
