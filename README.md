@@ -157,11 +157,6 @@ Short TTS clips often finish well before the 60-second timeout; the state is onl
 3. Use audio codec `pcma`
 4. Enable **Third-Party Compatibility** in the Tapo app (Lab section) if needed
 
-### HACS shows "icon not available"
-
-Expected for many custom integrations after Home Assistant 2026.3.  
-The icon still appears under **Settings → Devices & Services** after install. HACS list icons for new custom integrations are a known HACS limitation.
-
 ## Credits
 
 Inspired by the media_player platform in [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC).  
