@@ -1,26 +1,19 @@
 # go2rtc Media Player
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![GitHub release](https://img.shields.io/github/release/Wereling1992/ha-go2rtc-media-player.svg)](https://github.com/Wereling1992/ha-go2rtc-media-player/releases)
+[![License](https://img.shields.io/github/license/Wereling1992/ha-go2rtc-media-player.svg)](LICENSE)
 
-**Turn any IP camera with two-way audio into a Home Assistant `media_player` — no `configuration.yaml` editing required.**
+Turn any go2rtc camera stream with two-way audio into a Home Assistant `media_player`.
 
-Play TTS, Chime TTS, music, or any audio file through the camera speaker. Configure everything from **Settings → Devices & Services**, just like a normal integration.
-
-Unlike the YAML-only `media_player` platform in [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC), this integration uses a full config flow so you never need to restart Home Assistant just to add or edit a camera speaker.
-
-## Why this integration?
-
-| | WebRTC YAML media_player | **go2rtc Media Player** |
-|--|--------------------------|-------------------------|
-| Setup | Edit `configuration.yaml` | UI only |
-| Add / change camera | Restart Home Assistant | Options flow (gear icon) |
+Play TTS, Chime TTS, music, or any audio file through the camera speaker. Configured entirely from the UI.
 
 ## Features
 
-- **No YAML** — add and edit players from the UI
+- Add and manage players from the UI (Config Flow + Options Flow)
 - Works with `media_player.play_media`, TTS, Chime TTS, Music Assistant, etc.
 - Uses the official go2rtc [Stream to camera](https://go2rtc.org/internal/streams/#stream-to-camera) API
-- Options flow to change name / stream / codec later without restarting
+- Change name, stream, or codec later without restarting Home Assistant
 - Compatible with the same backchannel mechanism used by [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC)
 
 ## Requirements
@@ -31,50 +24,53 @@ Unlike the YAML-only `media_player` platform in [AlexxIT/WebRTC](https://github.
 
 ### Supported cameras (examples)
 
-| Brand / Protocol | Typical codec |
-|------------------|---------------|
-| Tapo (`tapo://`) | `pcma` |
-| Reolink          | `pcmu/8000` or `pcma` |
-| Dahua / Amcrest  | `pcma` or `pcma/48000` |
-| Hikvision (ISAPI)| `pcma` |
-| Generic RTSP with backchannel | check go2rtc probe |
+| Brand / Protocol              | Typical codec          |
+|-------------------------------|------------------------|
+| Tapo (`tapo://`)              | `pcma`                 |
+| Reolink                       | `pcmu/8000` or `pcma`  |
+| Dahua / Amcrest               | `pcma` or `pcma/48000` |
+| Hikvision (ISAPI)             | `pcma`                 |
+| Generic RTSP with backchannel | Check go2rtc probe     |
 
 > **Important for Tapo**  
 > The stream **must** include a `tapo://` source. Pure RTSP does **not** expose the backchannel on Tapo cameras.
 
 ## Installation
 
-### HACS (recommended)
+### HACS (Recommended)
 
-1. HACS → Integrations → ⋮ → Custom repositories
-2. Add `https://github.com/Wereling1992/ha-go2rtc-media-player` as a repository, category **Integration**
-3. Install **go2rtc Media Player**
-4. Restart Home Assistant
+1. Open **HACS** → **Integrations**
+2. Click the three dots (⋮) → **Custom repositories**
+3. Add the following repository and select category **Integration**:
+   ```
+   https://github.com/Wereling1992/ha-go2rtc-media-player
+   ```
+4. Search for **go2rtc Media Player** and download it
+5. Restart Home Assistant
 
-### Manual
+### Manual Installation
 
-1. Copy `custom_components/go2rtc_media_player` into your Home Assistant `config/custom_components/` folder
-2. Restart Home Assistant
+1. Download the latest [Release](https://github.com/Wereling1992/ha-go2rtc-media-player/releases)
+2. Copy the `custom_components/go2rtc_media_player` folder into your Home Assistant `config/custom_components/` directory
+3. Restart Home Assistant
 
 ## Configuration
-
-**No `configuration.yaml` needed.**
 
 1. Go to **Settings → Devices & Services**
 2. Click **+ Add Integration**
 3. Search for **go2rtc Media Player**
 4. Fill in the form:
 
-| Field | Example | Description |
-|-------|---------|-------------|
-| Name | Front Door Speaker | Friendly name |
-| go2rtc stream name | front_door | Must match the name in go2rtc |
-| Audio codec | pcma | Codec the camera accepts |
-| go2rtc base URL | http://127.0.0.1:1984 | Change only if go2rtc is remote |
+| Field               | Example                  | Description                              |
+|---------------------|--------------------------|------------------------------------------|
+| Name                | Front Door Speaker       | Friendly name                            |
+| go2rtc stream name  | front_door               | Must match the name in go2rtc            |
+| Audio codec         | pcma                     | Codec the camera accepts                 |
+| go2rtc base URL     | http://127.0.0.1:1984    | Change only if go2rtc is remote          |
 
 You will get a new entity, e.g. `media_player.front_door_speaker`.
 
-To edit later, open the integration and use the **gear (options)** icon — no restart required for name / stream / codec changes.
+To edit later, open the integration and use the **gear (options)** icon.
 
 ## Usage
 
@@ -121,23 +117,19 @@ data:
 3. Test **Play Audio** directly from the go2rtc Web UI first
 4. If the Web UI works but the media_player does not, check the Home Assistant log for `go2rtc_media_player`
 
-## FAQ / Q&A
-
-### Do I need to edit configuration.yaml?
-
-No. Everything is done in the UI (Settings → Devices & Services). That is the main point of this integration.
+## FAQ
 
 ### Why is there no volume control in Home Assistant?
 
-go2rtc's stream-to-camera API has **no volume parameter**.  
+go2rtc's stream-to-camera API has no volume parameter.  
 Software volume filters via ffmpeg often break audio on cameras (especially Tapo).
 
-**Adjust the speaker volume in the camera's own app** instead:
+Adjust the speaker volume in the camera's own app instead:
 
 - **Tapo**: Tapo app → camera settings → sound / speaker volume
 - Other brands: manufacturer app or camera web UI
 
-Chime TTS also has its own volume / gain options if you need louder or quieter announcements at generation time.
+Chime TTS also has its own volume / gain options if you need louder or quieter announcements.
 
 ### Why does the player stay on "Playing"?
 
@@ -161,3 +153,7 @@ Short TTS clips often finish well before the 60-second timeout; the state is onl
 
 Inspired by the media_player platform in [AlexxIT/WebRTC](https://github.com/AlexxIT/WebRTC).  
 Uses the public go2rtc Stream-to-camera API.
+
+## License
+
+MIT
